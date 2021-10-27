@@ -65,3 +65,12 @@ def testModificaRezervarea():
     assert getClasa(prajituraNeupdatata) == "economy"
     assert getPret(prajituraNeupdatata) == 200
     assert getCheckin(prajituraNeupdatata) == "da"
+
+def testGetById():
+    lista = []
+    lista = adaugaRezervare("1", "Stanciu Alexandra", "economy", 200, "da", lista)
+    lista = adaugaRezervare("5", "Popa Cristina", "business", 255, "nu", lista)
+
+    assert getById("1", lista) is not None
+    assert getById("7", lista) is None
+

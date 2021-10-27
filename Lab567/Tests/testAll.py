@@ -1,4 +1,4 @@
-from Tests.testCRUD import testAdaugaRezervare, testStergereRezervare, testModificaRezervarea
+from Tests.testCRUD import testAdaugaRezervare, testStergereRezervare, testModificaRezervarea, testGetById
 from Tests.testDomeniu import testRezervare
 from Tests.testFunctionalitati import testTrecereaRezervarilorLaClasaSuperioara
 
@@ -9,3 +9,4 @@ def runAllTests():
     testStergereRezervare()
     testModificaRezervarea()
     testTrecereaRezervarilorLaClasaSuperioara()
+    testGetById()
