@@ -39,6 +39,19 @@ def getByNume(nume, lista):
             return rezervare
     return None
 
+def getById(id, lista):
+    """
+    ia rezervarea cu id-ul dat dintr-o lista
+    :param id: string
+    :param lista: lista de rezervari
+    :return: rezervarea cu id-ul dat sau None, daca nu exista nicio rezervare cu id-ul dat
+    """
+    for rezervare in lista:
+        if getId(rezervare) == id:
+            return rezervare
+    return None
+
+
 def stergeRezervare(id, lista):
     """
     sterge o rezervare dintr-o lista dupa id

@@ -1,6 +1,7 @@
 from Domain.rezervare import toString
 from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare
-from Logic.functionalitati import trecereaRezervarilorLaClasaSuperioara
+from Logic.functionalitati import trecereaRezervarilorLaClasaSuperioara, ieftinireaRezervarilorCuCheckinCuUnProcentaj, \
+    pretulMaximPentruFiecareClasa
 
 
 def printMenu():
@@ -8,6 +9,8 @@ def printMenu():
     print("2. Stergere rezervare")
     print("3. Modificare rezervare")
     print("4. Trecerea tuturor rezervărilor făcute pe un nume citit la o clasă superioară")
+    print("5. Ieftinirea tuturor rezervărilor la care s-a făcut checkin cu un procentaj citit")
+    print("6. Determinarea prețului maxim pentru fiecare clasă")
     print("a. Afisare toate rezervarile")
     print("x. Iesire")
 
@@ -45,6 +48,15 @@ def uiTrecereaRezervarilorLaClasaSuperioara(lista):
     return trecereaRezervarilorLaClasaSuperioara(nume, lista)
 
 
+def uiIeftinireaRezervarilorCuCheckinCuUnProcentaj(lista):
+    procent = int(input("Dati un numar care reprezinta procentul ieftinirii: "))
+    return ieftinireaRezervarilorCuCheckinCuUnProcentaj(procent, lista)
+
+
+def uiPretulMaximPentruFiecareClasa(lista):
+    return pretulMaximPentruFiecareClasa(lista)
+
+
 def runMenu(lista):
     while True:
         printMenu()
@@ -58,6 +70,10 @@ def runMenu(lista):
             lista = uiModificareRezervare(lista)
         elif optiune == "4":
             lista = uiTrecereaRezervarilorLaClasaSuperioara(lista)
+        elif optiune == "5":
+            lista = uiIeftinireaRezervarilorCuCheckinCuUnProcentaj(lista)
+        elif optiune == "6":
+            print(uiPretulMaximPentruFiecareClasa(lista))
         elif optiune == "a":
             showAll(lista)
         elif optiune == "x":
