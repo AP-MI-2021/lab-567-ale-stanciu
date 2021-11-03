@@ -1,5 +1,5 @@
 from Domain.rezervare import toString
-from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare
+from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare, getById
 from Logic.functionalitati import trecereaRezervarilorLaClasaSuperioara, ieftinireaRezervarilorCuCheckinCuUnProcentaj, \
     pretulMaximPentruFiecareClasa
 
@@ -16,26 +16,41 @@ def printMenu():
 
 
 def uiAdaugareRezervare(lista):
-    id = input("Dati id-ul: ")
-    nume = input("Dati numele: ")
-    clasa = input("Dati clasa: ")
-    pret = float(input("Dati pretul: "))
-    checkin = input("Dati checkin-ul: ")
-    return adaugaRezervare(id, nume, clasa, pret, checkin, lista)
+    try:
+        id = input("Dati id-ul: ")
+        nume = input("Dati numele: ")
+        clasa = input("Dati clasa: ")
+        pret = float(input("Dati pretul: "))
+        checkin = input("Dati checkin-ul: ")
+        return adaugaRezervare(id, nume, clasa, pret, checkin, lista)
+    except ValueError as ve:
+        print("Eroare: ",ve)
+        return lista
 
 
 def uiStergereRezervare(lista):
-    id = input("Dati id-ul rezervarii de sters: ")
-    return stergeRezervare(id, lista)
+    try:
+        id = input("Dati id-ul rezervarii de sters: ")
+        if getById(id, lista) is None:
+            raise ValueError("Id-ul nu exista")
+        else:
+            return stergeRezervare(id, lista)
+    except ValueError as ve:
+        print("Eroare: ",ve)
+        return lista
 
 
 def uiModificareRezervare(lista):
-    id = input("Dati id-ul rezervarii de modificat: ")
-    nume = input("Dati noul nume: ")
-    clasa = input("Dati noua clasa: ")
-    pret = float(input("Dati noul pret: "))
-    checkin = input("Dati noul checkin: ")
-    return modificaRezervare(id, nume, clasa, pret, checkin, lista)
+    try:
+        id = input("Dati id-ul rezervarii de modificat: ")
+        nume = input("Dati noul nume: ")
+        clasa = input("Dati noua clasa: ")
+        pret = float(input("Dati noul pret: "))
+        checkin = input("Dati noul checkin: ")
+        return modificaRezervare(id, nume, clasa, pret, checkin, lista)
+    except ValueError as ve:
+        print("Eroare: ",ve)
+        return lista
 
 
 def showAll(lista):
@@ -44,18 +59,28 @@ def showAll(lista):
 
 
 def uiTrecereaRezervarilorLaClasaSuperioara(lista):
-    nume = input("Dati numele: ")
-    return trecereaRezervarilorLaClasaSuperioara(nume, lista)
+    try:
+        nume = input("Dati numele: ")
+        return trecereaRezervarilorLaClasaSuperioara(nume, lista)
+    except ValueError as ve:
+        print("Eroare: ",ve)
+        return lista
 
 
 def uiIeftinireaRezervarilorCuCheckinCuUnProcentaj(lista):
-    procent = int(input("Dati un numar care reprezinta procentul ieftinirii: "))
-    return ieftinireaRezervarilorCuCheckinCuUnProcentaj(procent, lista)
-
+    try:
+        procent = int(input("Dati un numar care reprezinta procentul ieftinirii: "))
+        return ieftinireaRezervarilorCuCheckinCuUnProcentaj(procent, lista)
+    except ValueError as ve:
+        print("Eroare: ",ve)
+        return lista
 
 def uiPretulMaximPentruFiecareClasa(lista):
-    return pretulMaximPentruFiecareClasa(lista)
-
+    try:
+        return pretulMaximPentruFiecareClasa(lista)
+    except ValueError as ve:
+        print("Eroare: ",ve)
+        return lista
 
 def runMenu(lista):
     while True:
