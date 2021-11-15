@@ -65,7 +65,7 @@ def stergeRezervare(id, lista):
 
 def modificaRezervare(id, nume, clasa, pret, checkin, lista):
     """
-
+    modifica rezervarea cu id-ul dat
     :param id: id-ul dupa care se face modificarea
     :param nume: noul nume
     :param clasa: noua clasa

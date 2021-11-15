@@ -101,12 +101,26 @@ def pretulMaximPentruFiecareClasa(lista):
         maxim_business
     )
 
-'''
 def ordonareDescrescatorDupaPret(lista):
     """
-    Ordoneaza rezervarile descrescator, dupa pret
+    Ordoneaza rezervarile descrescator dupa pret
     :param lista: lista de rezervari
-    :return: lista de rezervari modificata
+    :return: lista de rezervari ordonata
     """
     return sorted(lista, reverse=True, key=lambda rezervare: getPret(rezervare))
-'''
+
+def sumePreturiPerNume(lista):
+    """
+    Afiseaza suma preturilor pentru fiecare nume
+    :param lista: lista de rezervari
+    :return: suma preturilor pentru fiecare nume
+    """
+    rezultat = {}
+    for rezervare in lista:
+        nume = getNume(rezervare)
+        pret = getPret(rezervare)
+        if nume in rezultat:
+            rezultat[nume] += pret
+        else:
+            rezultat[nume] = pret
+    return rezultat

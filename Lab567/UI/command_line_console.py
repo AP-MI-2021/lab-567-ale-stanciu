@@ -1,4 +1,4 @@
-from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare
+from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare, getById
 from UI.console import showAll
 
 
@@ -26,9 +26,25 @@ def UIAdaugaORezervare(lista, lista_data):
     :return: lista modificata
     """
     try:
+        id = lista_data[0]
+        if getById(id, lista) is not None:
+            raise ValueError("Id-ul exista deja in lista!")
+        nume = lista_data[1]
+        clasa = lista_data[2]
+        if clasa != "economy" and clasa != "economy plus" and clasa != "business":
+            print("Ati introdus o clasa inexistenta!!!")
+            return lista
+        checkin = lista_data[4]
+        if checkin != "da" and checkin != "nu":
+            print("Nu ati introdus un checkin corect!")
+            return lista
+        pret = float(lista_data[3])
         return adaugaRezervare(lista_data[0], lista_data[1], lista_data[2], float(lista_data[3]), lista_data[4], lista)
+    except IndexError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
     except ValueError as ve:
-        print("Eroare: ",ve)
+        print("Eroare: {}".format(ve))
         return lista
 
 
@@ -40,10 +56,16 @@ def UIStergeORezervare(lista, lista_data):
     :return: lista modificata
     """
     try:
-        return stergeRezervare(lista_data[0], lista)
-    except ValueError as ve:
-        print("Eroare: ",ve)
-        return lista
+        id = lista_data[0]
+        if getById(id, lista) is None:
+            print("Id-ul nu exista!")
+            return lista
+        else:
+            return stergeRezervare(lista_data[0], lista)
+    except IndexError as ve:
+        print("Eroare: {}".format(ve))
+
+
 
 def UIModificaORezervare(lista, lista_data):
     """
@@ -53,9 +75,23 @@ def UIModificaORezervare(lista, lista_data):
     :return: lista modificata
     """
     try:
-        return adaugaRezervare(lista_data[0], lista_data[1], lista_data[2], float(lista_data[3]), lista_data[4], lista)
+        id = lista_data[0]
+        nume = lista_data[1]
+        clasa = lista_data[2]
+        if clasa != "economy" and clasa != "economy plus" and clasa != "business":
+            print("Ati introdus o clasa inexistenta!!!")
+            return lista
+        checkin = lista_data[4]
+        if checkin != "da" and checkin != "nu":
+            print("Nu ati introdus un checkin corect!")
+            return lista
+        pret = float(lista_data[3])
+        return modificaRezervare(lista_data[0], lista_data[1], lista_data[2], float(lista_data[3]), lista_data[4], lista)
+    except IndexError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
     except ValueError as ve:
-        print("Eroare: ",ve)
+        print("Eroare: {}".format(ve))
         return lista
 
 def runMENIU(lista_rezervari):
