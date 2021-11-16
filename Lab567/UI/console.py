@@ -1,5 +1,5 @@
-from Domain.rezervare import toString
-from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare, getById
+from Domain.rezervare import toString, getNume, getClasa, getPret, getCheckin
+from Logic.CRUD import adaugaRezervare, stergeRezervare, modificaRezervare, getById, getByNume
 from Logic.functionalitati import trecereaRezervarilorLaClasaSuperioara, ieftinireaRezervarilorCuCheckinCuUnProcentaj, \
     pretulMaximPentruFiecareClasa, ordonareDescrescatorDupaPret, sumePreturiPerNume
 
@@ -171,20 +171,43 @@ def runMenu(lista):
         elif optiune == "8":
             print(uiSumePreturiPerNume(lista))
         elif optiune == "u":
-            if len(undoList) > 0:
-                redoList.append(lista)
-                lista = undoList.pop()
-            else:
-                print("Nu se poate face undo!")
+            lista = undoAfisare(lista, undoList, redoList)
         elif optiune == "r":
-            if len(redoList) > 0:
-                undoList.append(lista)
-                lista = redoList.pop()
-            else:
-                print("Nu se poate face redo!")
+            lista = redoAfisare(lista, undoList, redoList)
         elif optiune == "a":
             showAll(lista)
         elif optiune == "x":
             break
         else:
             print("Optiune gresita! Reincercati!")
+
+
+def undoAfisare(lista, undoList, redoList):
+    if len(undoList) > 0:
+        redoList.append(lista)
+        lista = undoList.pop()
+    else:
+        print("Nu se poate face undo!")
+    return lista
+
+
+def undoTestare(lista, undoList, redoList):
+    if len(undoList) > 0:
+        redoList.append(lista)
+        lista = undoList.pop()
+    return lista
+
+def redoAfisare(lista, undoList, redoList):
+    if len(redoList) > 0:
+        undoList.append(lista)
+        lista = redoList.pop()
+    else:
+        print("Nu se poate face redo!")
+    return lista
+
+def redoTestare(lista, undoList, redoList):
+    if len(redoList) > 0:
+        undoList.append(lista)
+        lista = redoList.pop()
+    return lista
+
