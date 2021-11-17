@@ -3,6 +3,7 @@ from Tests.testDomeniu import testRezervare
 from Tests.testFunctionalitati import testTrecereaRezervarilorLaClasaSuperioara, \
     testIeftinireaRezervarilorCuCheckinCuUnProcentaj, testPretulMaximPentruFiecareClasa, \
     testOrdonareDescrescatorDupaPret, testSumePreturiPerNume
+from Tests.testUndoRedo import testUndoRedo
 
 
 def runAllTests():
@@ -16,3 +17,4 @@ def runAllTests():
     testGetById()
     testOrdonareDescrescatorDupaPret()
     testSumePreturiPerNume()
+    testUndoRedo()
